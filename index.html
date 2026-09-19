@@ -7,6 +7,10 @@
   <title>BuyBritish | Find and support British businesses</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <meta name="description" content="Discover British retailers, British brands and UK-made products with BuyBritish.">
+  <!-- Google Fonts: Playfair Display + Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -23,12 +27,30 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', Arial, sans-serif;
       background: var(--cream);
       color: var(--text);
       line-height: 1.6;
     }
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
 
+p,
+a,
+button,
+input,
+textarea {
+  font-family: 'Montserrat', Arial, sans-serif;
+}
     a {
       color: inherit;
     }
@@ -89,9 +111,10 @@
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      line-height: 1.15;
-      margin: 0 0 16px;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.05;
+  font-weight: 700;
+  margin: 0 0 20px;
     }
 
     .hero p {
@@ -209,10 +232,10 @@
 <main class="container">
 
   <section class="hero">
-    <h1>The smarter way to support British business</h1>
+    <h1>The smart way to support British business</h1>
     <p>
-      Helping consumers discover British retailers, British brands
-      and UK-made products.
+      Discover British brands, find UK-made products and compare prices - all in one place.
+      Coming soon.
     </p>
   </section>
 
@@ -220,9 +243,9 @@
 
   <section class="features">
     <article class="feature">
-      <h3>🏭 British brands</h3>
+      <h3>🏭 Discover brands</h3>
       <p>
-        Discover products from British businesses and manufacturers.
+        Explore British businesses and the products they offer.
       </p>
     </article>
 
@@ -234,9 +257,9 @@
     </article>
 
     <article class="feature">
-      <h3>🇬🇧 Shop informed</h3>
+      <h3>🎓 Intentional shopping</h3>
       <p>
-        Make informed choices about the businesses and products you support.
+        Make intentional choices about the businesses and products you support.
       </p>
     </article>
   </section>
@@ -252,6 +275,9 @@
       src="buybritish-preview.png"
       alt="Preview of the BuyBritish mobile prototype"
     >
+     <p>
+      (Preview)
+    </p>
   </section>
 
 </main>
