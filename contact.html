@@ -4,134 +4,203 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Contact us | BuyBritish</title>
+  <meta name="description" content="Get in touch with BuyBritish. We'd love to hear from you.">
+
   <style>
     :root {
       --green: #143D2B;
       --cream: #F7F4EC;
+      --white: #FFFFFF;
+      --text: #26352D;
+      --muted: #65716A;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: var(--cream);
-      color: #26352D;
-      line-height: 1.7;
+      color: var(--text);
+      line-height: 1.6;
     }
 
-    header, footer {
+    a {
+      color: inherit;
+    }
+
+    .header {
       background: var(--green);
       color: white;
     }
 
-    nav {
+    .nav {
       max-width: 1100px;
       margin: auto;
       padding: 16px 24px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .links {
-      display: flex;
+      justify-content: space-between;
       gap: 24px;
     }
 
-    .links a[aria-current="page"] {
+    .logo {
+      display: block;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      width: 190px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
       text-decoration: underline;
       text-underline-offset: 6px;
     }
 
-    main {
-      max-width: 850px;
+    .container {
+      max-width: 950px;
       margin: auto;
       padding: 56px 24px;
     }
 
-    h1, h2 { color: var(--green); }
-
-    .panel {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      margin-top: 24px;
+    h1, h2 {
+      color: var(--green);
+      line-height: 1.2;
     }
 
-    .button {
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 32px;
+    }
+
+    .content-card {
+      background: var(--white);
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 3px 12px rgba(20, 61, 43, 0.06);
+    }
+
+    .email-link {
       display: inline-block;
+      color: var(--green);
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
       background: var(--green);
       color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 12px;
-    }
-
-    footer {
       text-align: center;
       padding: 24px;
       margin-top: 32px;
     }
 
-    @media (max-width: 600px) {
-      nav { flex-direction: column; }
-      main { padding: 32px 18px; }
+    .footer a {
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .container {
+        padding: 32px 18px;
+      }
+
+      .content-card {
+        padding: 24px;
+      }
+
+      .site-logo {
+        width: 170px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <nav aria-label="Main navigation">
-    <a class="logo" href="index.html">🇬🇧 BuyBritish</a>
-    <div class="links">
+<header class="header">
+  <nav class="nav" aria-label="Main navigation">
+
+    <a class="logo" href="index.html">
+      <img
+        src="buybritish-logo-light.png"
+        alt="BuyBritish — Supporting British Brands"
+        class="site-logo"
+      >
+    </a>
+
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About us</a>
       <a href="contact.html" aria-current="page">Contact us</a>
     </div>
+
   </nav>
 </header>
 
-<main>
+<main class="container">
+
   <h1>Contact us</h1>
 
-  <section class="panel">
-    <h2>Get in touch</h2>
+  <section class="content-card">
+    <h2>We'd love to hear from you</h2>
+
     <p>
-      Have a question, suggestion or interested in working with
-      BuyBritish? We'd love to hear from you.
+      Have a question, a suggestion, or interested in working
+      with BuyBritish? Get in touch.
     </p>
 
     <p>
-      Email us at:
-      <strong>hello@buybritish.co</strong>
+      <strong>Email:</strong><br>
+      <a
+        class="email-link"
+        href="mailto:hello@buybritish.co"
+      >
+        hello@buybritish.co
+      </a>
     </p>
 
-    <a class="button" href="mailto:hello@buybritish.co">
-      Email BuyBritish
-    </a>
+    <p>
+      We're building BuyBritish and welcome feedback from
+      shoppers, British brands and retailers.
+    </p>
   </section>
+
 </main>
 
-<footer>
+<footer class="footer">
   <p>© 2026 BuyBritish</p>
-  <p><a href="about.html">About us</a></p>
+  <p><a href="contact.html">Contact us</a></p>
 </footer>
 
 </body>
