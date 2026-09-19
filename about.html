@@ -4,135 +4,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>About us | BuyBritish</title>
+  <meta name="description" content="Learn about BuyBritish and our mission to help consumers discover British businesses and UK-made products.">
+
   <style>
     :root {
       --green: #143D2B;
       --cream: #F7F4EC;
+      --white: #FFFFFF;
+      --text: #26352D;
+      --muted: #65716A;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: var(--cream);
-      color: #26352D;
-      line-height: 1.7;
+      color: var(--text);
+      line-height: 1.6;
     }
 
-    header, footer {
+    a {
+      color: inherit;
+    }
+
+    .header {
       background: var(--green);
       color: white;
     }
 
-    nav {
+    .nav {
       max-width: 1100px;
       margin: auto;
       padding: 16px 24px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .links {
-      display: flex;
+      justify-content: space-between;
       gap: 24px;
     }
 
-    .links a[aria-current="page"] {
+    .logo {
+      display: block;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      width: 190px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
       text-decoration: underline;
       text-underline-offset: 6px;
     }
 
-    main {
-      max-width: 850px;
+    .container {
+      max-width: 950px;
       margin: auto;
       padding: 56px 24px;
     }
 
-    h1, h2 { color: var(--green); }
-
-    .panel {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      margin-top: 24px;
+    h1, h2 {
+      color: var(--green);
+      line-height: 1.2;
     }
 
-    footer {
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 32px;
+    }
+
+    .content-card {
+      background: var(--white);
+      padding: 32px;
+      margin-bottom: 24px;
+      border-radius: 16px;
+      box-shadow: 0 3px 12px rgba(20, 61, 43, 0.06);
+    }
+
+    .content-card h2 {
+      margin-top: 0;
+    }
+
+    .footer {
+      background: var(--green);
+      color: white;
       text-align: center;
       padding: 24px;
       margin-top: 32px;
     }
 
-    @media (max-width: 600px) {
-      nav { flex-direction: column; }
-      main { padding: 32px 18px; }
+    .footer a {
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .container {
+        padding: 32px 18px;
+      }
+
+      .content-card {
+        padding: 24px;
+      }
+
+      .site-logo {
+        width: 170px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <nav aria-label="Main navigation">
-    <a class="logo" href="index.html">🇬🇧 BuyBritish</a>
-    <div class="links">
+<header class="header">
+  <nav class="nav" aria-label="Main navigation">
+
+    <a class="logo" href="index.html">
+      <img
+        src="buybritish-logo-light.png"
+        alt="BuyBritish — Supporting British Brands"
+        class="site-logo"
+      >
+    </a>
+
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html" aria-current="page">About us</a>
       <a href="contact.html">Contact us</a>
     </div>
+
   </nav>
 </header>
 
-<main>
+<main class="container">
+
   <h1>About BuyBritish</h1>
 
-  <section class="panel">
+  <section class="content-card">
     <h2>Our mission</h2>
+
     <p>
       BuyBritish helps consumers discover British retailers,
       British brands and UK-made products.
     </p>
+
     <p>
       We want to make it easier to find products, compare prices
       and make informed decisions about where you shop.
     </p>
   </section>
 
-  <section class="panel">
+  <section class="content-card">
     <h2>What we mean by British</h2>
+
     <p>
-      British businesses and products can have different connections
-      to the UK. We aim to make those distinctions clear, including
-      UK-headquartered retailers, British brands, and products
-      designed, assembled or manufactured in the UK.
+      British businesses and products can have different
+      connections to the UK. We aim to make those distinctions
+      clear, including UK-headquartered retailers, British brands,
+      and products designed, assembled or manufactured in the UK.
     </p>
   </section>
 
-  <section class="panel">
+  <section class="content-card">
     <h2>What we're building</h2>
+
     <p>
-      BuyBritish is in development. We're working towards a platform
-      that helps shoppers discover products and compare offers
-      from retailers in one place.
+      We're working on a platform that will help shoppers
+      discover products and compare prices across retailers.
+    </p>
+
+    <p>
+      Our aim is to make it easier to find the products you want
+      while understanding more about the businesses behind them.
     </p>
   </section>
+
 </main>
 
-<footer>
+<footer class="footer">
   <p>© 2026 BuyBritish</p>
   <p><a href="contact.html">Contact us</a></p>
 </footer>
