@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About us | BuyBritish</title>
+  <style>
+    :root {
+      --green: #143D2B;
+      --cream: #F7F4EC;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: #26352D;
+      line-height: 1.7;
+    }
+
+    header, footer {
+      background: var(--green);
+      color: white;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .links a[aria-current="page"] {
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: auto;
+      padding: 56px 24px;
+    }
+
+    h1, h2 { color: var(--green); }
+
+    .panel {
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 600px) {
+      nav { flex-direction: column; }
+      main { padding: 32px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main navigation">
+    <a class="logo" href="index.html">🇬🇧 BuyBritish</a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="about.html" aria-current="page">About us</a>
+      <a href="contact.html">Contact us</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <h1>About BuyBritish</h1>
+
+  <section class="panel">
+    <h2>Our mission</h2>
+    <p>
+      BuyBritish helps consumers discover British retailers,
+      British brands and UK-made products.
+    </p>
+    <p>
+      We want to make it easier to find products, compare prices
+      and make informed decisions about where you shop.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>What we mean by British</h2>
+    <p>
+      British businesses and products can have different connections
+      to the UK. We aim to make those distinctions clear, including
+      UK-headquartered retailers, British brands, and products
+      designed, assembled or manufactured in the UK.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>What we're building</h2>
+    <p>
+      BuyBritish is in development. We're working towards a platform
+      that helps shoppers discover products and compare offers
+      from retailers in one place.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 BuyBritish</p>
+  <p><a href="contact.html">Contact us</a></p>
+</footer>
+
+</body>
+</html>
