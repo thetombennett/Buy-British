@@ -17,13 +17,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --green: #143D2B;
-      --cream: #F7F4EC;
-      --white: #FFFFFF;
-      --text: #26352D;
-      --muted: #65716A;
-    }
+:root {
+  --navy: #123F70;
+  --navy-dark: #0D3158;
+  --blue-accent: #7BD3E3;
+  --cream: #F7F4EC;
+  --white: #FFFFFF;
+  --text: #263747;
+  --muted: #657582;
+}
 
     * {
       box-sizing: border-box;
@@ -60,7 +62,7 @@ textarea {
     }
 
     .header {
-      background: var(--green);
+      background: var(--navy);
       color: white;
     }
 
@@ -98,11 +100,12 @@ textarea {
       font-weight: 600;
     }
 
-    .nav-links a:hover,
-    .nav-links a[aria-current="page"] {
-      text-decoration: underline;
-      text-underline-offset: 6px;
-    }
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--blue-accent);
+  text-underline-offset: 6px;
+}
 
     .container {
       max-width: 950px;
@@ -111,7 +114,7 @@ textarea {
     }
 
     h1, h2 {
-      color: var(--green);
+      color: var(--navy);
       line-height: 1.2;
     }
 
@@ -133,7 +136,7 @@ textarea {
     }
 
     .footer {
-      background: var(--green);
+      background: var(--navy);
       color: white;
       text-align: center;
       padding: 24px;
