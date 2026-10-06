@@ -160,6 +160,30 @@ textarea {
       margin-top: 0;
     }
 
+    .hero .hero-cta {
+      margin-top: 28px;
+    }
+
+    .hero-cta a {
+      display: inline-block;
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 999px;
+    }
+
+    .category {
+      display: block;
+      text-decoration: none;
+      border-bottom: 4px solid var(--blue-accent);
+    }
+
+    .category:hover h3 {
+      text-decoration: underline;
+    }
+
     .coming-soon {
       margin-top: 56px;
       text-align: center;
@@ -236,6 +260,8 @@ textarea {
 
     <div class="nav-links">
       <a href="index.html" aria-current="page">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="for-brands.html">For brands</a>
       <a href="about.html">About us</a>
       <a href="contact.html">Contact us</a>
     </div>
@@ -247,9 +273,9 @@ textarea {
   <section class="hero">
     <h1>The smarter way to support British business</h1>
     <p>
-      Discover British brands, find UK-made products and compare prices - all in one place.
-      Coming soon.
+      Discover British brands and find UK-made products, each with a medal showing how British it is.
     </p>
+    <p class="hero-cta"><a href="shop.html">Start browsing</a></p>
   </section>
 
   <h2 class="section-heading">Discover a better way to shop</h2>
@@ -277,10 +303,27 @@ textarea {
     </article>
   </section>
 
+  <h2 class="section-heading">Browse by category</h2>
+
+  <section class="features">
+    <a class="feature category" href="clothing.html">
+      <h3>Clothing</h3>
+      <p>Leather and sheepskin jackets, coats, gloves and accessories.</p>
+    </a>
+    <a class="feature category" href="bags.html">
+      <h3>Bags &amp; leather goods</h3>
+      <p>Handbags, wallets, travel bags and small leather goods.</p>
+    </a>
+    <a class="feature category" href="health-beauty.html">
+      <h3>Health &amp; beauty</h3>
+      <p>Soaps, hand care and bath and body products made in Britain.</p>
+    </a>
+  </section>
+
   <section class="coming-soon">
-    <h2>Launching soon</h2>
+    <h2>The app is launching soon</h2>
     <p>
-      We are currently building the BuyBritish platform.
+      We are building the BuyBritish mobile app, with search and price comparison across retailers.
     </p>
 
     <img
@@ -296,8 +339,9 @@ textarea {
 </main>
 
 <footer class="footer">
+  <p>BuyBritish is an affiliate site. If you buy through a link here, we may earn a commission from the retailer at no cost to you. Commission never affects a medal.</p>
+  <p><a href="for-brands.html">For brands and retailers</a> · <a href="contact.html">Contact us</a></p>
   <p>© 2026 BuyBritish</p>
-  <p><a href="contact.html">Contact us</a></p>
 </footer>
 
 </body>
