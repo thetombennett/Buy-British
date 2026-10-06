@@ -50,6 +50,11 @@
 <header class="header">
   <nav class="nav" aria-label="Main navigation">
     <a class="logo" href="index.html"><img src="buybritish-logo-dark.png" alt="BuyBritish — Supporting British Brands" class="site-logo"></a>
+    <form class="search search-header" action="search.html" method="get" role="search">
+      <input type="search" name="q" value="" placeholder="Search British brands and products" aria-label="Search British brands and products" autocomplete="off">
+      <button type="button" class="search-clear" aria-label="Clear search" hidden>✕</button>
+      <button type="submit" class="search-go">Go</button>
+    </form>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="shop.html">Shop</a>
@@ -88,7 +93,7 @@
       <li><strong>In stock only.</strong> Products your feed marks as out of stock aren't shown.</li>
       <li><strong>One listing per product.</strong> Sizes and colours are grouped into a single listing showing the lowest current price.</li>
       <li><strong>Dated prices.</strong> Each category page states when prices were last checked, and says that delivery is extra where your feed doesn't give a delivery cost.</li>
-      <li><strong>Straight to your site.</strong> Every listing links to the product page on your own site through your Awin tracking link.</li>
+      <li><strong>Straight to your site.</strong> Each product page has a "Go to store" button that opens the product on your own site through your Awin tracking link.</li>
       <li><strong>Medals by brand, not by retailer.</strong> If you stock several brands, each one is assessed separately. Brands we haven't checked yet aren't listed.</li>
     </ul>
   </section>
@@ -108,6 +113,7 @@
   <div class="footer-inner">
     <nav class="footer-links" aria-label="Footer">
       <a href="shop.html">Shop</a>
+      <a href="search.html">Search</a>
       <a href="for-brands.html#medals">How medals work</a>
       <a href="for-brands.html">For brands and retailers</a>
       <a href="about.html">About us</a>
@@ -117,5 +123,6 @@
     <p class="copy">© 2026 BuyBritish</p>
   </div>
 </footer>
+<script src="site.js" defer></script>
 </body>
 </html>

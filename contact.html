@@ -50,6 +50,11 @@
 <header class="header">
   <nav class="nav" aria-label="Main navigation">
     <a class="logo" href="index.html"><img src="buybritish-logo-dark.png" alt="BuyBritish — Supporting British Brands" class="site-logo"></a>
+    <form class="search search-header" action="search.html" method="get" role="search">
+      <input type="search" name="q" value="" placeholder="Search British brands and products" aria-label="Search British brands and products" autocomplete="off">
+      <button type="button" class="search-clear" aria-label="Clear search" hidden>✕</button>
+      <button type="submit" class="search-go">Go</button>
+    </form>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="shop.html">Shop</a>
@@ -83,6 +88,7 @@
   <div class="footer-inner">
     <nav class="footer-links" aria-label="Footer">
       <a href="shop.html">Shop</a>
+      <a href="search.html">Search</a>
       <a href="for-brands.html#medals">How medals work</a>
       <a href="for-brands.html">For brands and retailers</a>
       <a href="about.html">About us</a>
@@ -92,5 +98,6 @@
     <p class="copy">© 2026 BuyBritish</p>
   </div>
 </footer>
+<script src="site.js" defer></script>
 </body>
 </html>
