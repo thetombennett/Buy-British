@@ -77,7 +77,17 @@
 </div>
   <p class="note">Prices checked 28 September 2026, delivery not included. <a href="for-brands.html#medals">How medals work</a></p>
   <nav class="jump" aria-label="Sections"><a href="#coats-jackets">Coats &amp; jackets <span>115</span></a> <a href="#gilets">Gilets <span>8</span></a> <a href="#tops-knitwear">Tops &amp; knitwear <span>16</span></a> <a href="#trousers-skirts">Trousers &amp; skirts <span>12</span></a> <a href="#shoes-slippers">Shoes &amp; slippers <span>19</span></a> <a href="#gloves">Gloves <span>30</span></a> <a href="#belts">Belts <span>20</span></a> <a href="#hats-scarves">Hats &amp; scarves <span>3</span></a> <a href="#more-clothing">More clothing <span>4</span></a></nav>
-  <div class="filters" role="group" aria-label="Filter by who it is for"><button type="button" class="filter" data-gender="women" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unisex" aria-pressed="false">Unisex <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div>
+  <div class="tools"><button type="button" class="tool" id="open-filters" aria-haspopup="dialog">Filter <span class="badge" id="filter-badge" hidden></span></button></div>
+  <div class="active-filters" id="active-filters" aria-label="Filters applied" hidden></div>
+  <dialog class="sheet" id="filter-sheet" aria-labelledby="sheet-title">
+    <div class="sheet-head"><h2 id="sheet-title">Filters</h2>
+      <button type="button" class="sheet-close" id="sheet-close" aria-label="Close filters">✕</button></div>
+    <div class="sheet-body"><h3 id="f-for">Who it's for</h3><div class="filters" role="group" aria-labelledby="f-for"><button type="button" class="filter" data-gender="women" data-label="Women's" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" data-label="Men's" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unisex" data-label="Unisex" aria-pressed="false">Unisex <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" data-label="Unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn btn-outline" id="sheet-clear">Clear all</button>
+      <button type="button" class="btn btn-navy" id="sheet-done">Show results</button>
+    </div>
+  </dialog>
   <h2 id="coats-jackets">Coats &amp; jackets</h2>
   <ul class="grid">
 <li class="card" data-g="women">

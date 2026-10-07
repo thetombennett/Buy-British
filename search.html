@@ -70,13 +70,21 @@
   <div class="tries" id="tries"><span>Try:</span> <button type="button" class="try">leather jacket</button><button type="button" class="try">soap</button><button type="button" class="try">gloves</button><button type="button" class="try">tote bag</button><button type="button" class="try">hand cream</button><button type="button" class="try">wallet</button></div>
   <div class="meta-row">
     <div><p class="kicker" id="kicker">All British finds</p><p class="count" id="count" aria-live="polite">Loading…</p></div>
-    <label class="sort">Sort <select id="sort"><option value="most_british">Most British first</option><option value="price_asc">Price: low to high</option><option value="price_desc">Price: high to low</option><option value="name_asc">Name: A to Z</option><option value="name_desc">Name: Z to A</option></select></label>
+    <div class="tools"><button type="button" class="tool" id="open-filters" aria-haspopup="dialog">Filter <span class="badge" id="filter-badge" hidden></span></button>
+      <label class="sort"><span class="sr-only">Sort</span><select id="sort" aria-label="Sort results"><option value="most_british">Most British first</option><option value="price_asc">Price: low to high</option><option value="price_desc">Price: high to low</option><option value="name_asc">Name: A to Z</option><option value="name_desc">Name: Z to A</option></select></label></div>
   </div>
-  <div class="filters" role="group" aria-label="Filter results">
-    <button type="button" class="filter" data-tier="gold" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-gold"/></svg>Gold <span class="n"></span></button><button type="button" class="filter" data-tier="silver" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-silver"/></svg>Silver <span class="n"></span></button><button type="button" class="filter" data-tier="bronze" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-bronze"/></svg>Bronze <span class="n"></span></button>
-    <button type="button" class="filter" data-direct="1" aria-pressed="false">Direct only</button>
-  </div>
-  <div class="filters" role="group" aria-label="Filter by who it is for"><button type="button" class="filter" data-gender="women" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unisex" aria-pressed="false">Unisex <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div>
+  <div class="active-filters" id="active-filters" aria-label="Filters applied" hidden></div>
+  <dialog class="sheet" id="filter-sheet" aria-labelledby="sheet-title">
+    <div class="sheet-head"><h2 id="sheet-title">Filters</h2>
+      <button type="button" class="sheet-close" id="sheet-close" aria-label="Close filters">✕</button></div>
+    <div class="sheet-body"><h3 id="f-medal">Medal</h3><div class="filters" role="group" aria-labelledby="f-medal"><button type="button" class="filter" data-tier="gold" data-label="Gold medal" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-gold"/></svg>Gold <span class="n"></span></button><button type="button" class="filter" data-tier="silver" data-label="Silver medal" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-silver"/></svg>Silver <span class="n"></span></button><button type="button" class="filter" data-tier="bronze" data-label="Bronze medal" aria-pressed="false"><svg class="medal" width="20" height="23" aria-hidden="true"><use href="#medal-bronze"/></svg>Bronze <span class="n"></span></button></div>
+      <h3 id="f-for">Who it's for</h3><div class="filters" role="group" aria-labelledby="f-for"><button type="button" class="filter" data-gender="women" data-label="Women's" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" data-label="Men's" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unisex" data-label="Unisex" aria-pressed="false">Unisex <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" data-label="Unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div>
+      <h3 id="f-seller">Seller</h3><div class="filters" role="group" aria-labelledby="f-seller"><button type="button" class="filter" data-direct="1" data-label="Direct only" aria-pressed="false">Direct only</button></div></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn btn-outline" id="sheet-clear">Clear all</button>
+      <button type="button" class="btn btn-navy" id="sheet-done">Show results</button>
+    </div>
+  </dialog>
   <ul class="grid" id="results"></ul>
   <div class="empty" id="empty" hidden>
     <p>No products match your search and filters.</p>

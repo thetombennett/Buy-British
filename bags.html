@@ -84,7 +84,17 @@
 </div>
   <p class="note">Prices checked 28 September 2026, delivery not included. <a href="for-brands.html#medals">How medals work</a></p>
   <nav class="jump" aria-label="Sections"><a href="#wallets-purses">Wallets &amp; purses <span>64</span></a> <a href="#backpacks">Backpacks <span>10</span></a> <a href="#holdalls-travel-bags">Holdalls &amp; travel bags <span>9</span></a> <a href="#messenger-work-bags">Messenger &amp; work bags <span>11</span></a> <a href="#wash-bags">Wash bags <span>8</span></a> <a href="#bum-bags">Bum bags <span>6</span></a> <a href="#bag-straps">Bag straps <span>6</span></a> <a href="#handbags">Handbags <span>88</span></a> <a href="#small-leather-goods">Small leather goods <span>12</span></a></nav>
-  <div class="filters" role="group" aria-label="Filter by who it is for"><button type="button" class="filter" data-gender="women" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div>
+  <div class="tools"><button type="button" class="tool" id="open-filters" aria-haspopup="dialog">Filter <span class="badge" id="filter-badge" hidden></span></button></div>
+  <div class="active-filters" id="active-filters" aria-label="Filters applied" hidden></div>
+  <dialog class="sheet" id="filter-sheet" aria-labelledby="sheet-title">
+    <div class="sheet-head"><h2 id="sheet-title">Filters</h2>
+      <button type="button" class="sheet-close" id="sheet-close" aria-label="Close filters">✕</button></div>
+    <div class="sheet-body"><h3 id="f-for">Who it's for</h3><div class="filters" role="group" aria-labelledby="f-for"><button type="button" class="filter" data-gender="women" data-label="Women's" aria-pressed="false">Women's <span class="n"></span></button><button type="button" class="filter" data-gender="men" data-label="Men's" aria-pressed="false">Men's <span class="n"></span></button><button type="button" class="filter" data-gender="unspecified" data-label="Unspecified" aria-pressed="false">Unspecified <span class="n"></span></button></div></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn btn-outline" id="sheet-clear">Clear all</button>
+      <button type="button" class="btn btn-navy" id="sheet-done">Show results</button>
+    </div>
+  </dialog>
   <h2 id="wallets-purses">Wallets &amp; purses</h2>
   <ul class="grid">
 <li class="card" data-g="">

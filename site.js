@@ -23,6 +23,43 @@
     });
   });
 
+  // Filter sheet: one "Filter" button opens it; active filters show as removable chips.
+  var sheet = document.getElementById('filter-sheet');
+  var sheetUI = null;
+  if (sheet) {
+    var opener = document.getElementById('open-filters'), badge = document.getElementById('filter-badge');
+    var activeRow = document.getElementById('active-filters'), done = document.getElementById('sheet-done');
+    var clearAll = document.getElementById('sheet-clear'), onClear = function () {};
+    opener.addEventListener('click', function () { sheet.showModal(); });
+    document.getElementById('sheet-close').addEventListener('click', function () { sheet.close(); });
+    done.addEventListener('click', function () { sheet.close(); });
+    sheet.addEventListener('click', function (e) { if (e.target === sheet) sheet.close(); });
+    clearAll.addEventListener('click', function () { onClear(); });
+    sheetUI = {
+      // active: [{label, remove}], count: results showing, clear: turns every filter off
+      update: function (active, count, clear) {
+        onClear = clear;
+        badge.hidden = !active.length;
+        badge.textContent = active.length;
+        opener.classList.toggle('on', active.length > 0);
+        opener.setAttribute('aria-label', active.length ? 'Filter, ' + active.length + ' on' : 'Filter');
+        clearAll.disabled = !active.length;
+        done.textContent = 'Show ' + count + (count === 1 ? ' result' : ' results');
+        activeRow.hidden = !active.length;
+        activeRow.textContent = '';
+        active.forEach(function (a) {
+          var chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'active-chip';
+          chip.setAttribute('aria-label', 'Remove filter: ' + a.label);
+          chip.textContent = a.label + ' ✕';
+          chip.addEventListener('click', a.remove);
+          activeRow.appendChild(chip);
+        });
+      }
+    };
+  }
+
   // Category pages: filter the cards already on the page by who they are for.
   var list = document.getElementById('results');
   var pageFilters = list ? [] : Array.prototype.slice.call(document.querySelectorAll('.filter[data-gender]'));
@@ -30,6 +67,7 @@
     var grids = Array.prototype.slice.call(document.querySelectorAll('main ul.grid'));
     var chosen = [];
     var apply = function () {
+      var total = 0;
       grids.forEach(function (grid) {
         var visible = 0;
         Array.prototype.forEach.call(grid.children, function (li) {
@@ -41,8 +79,15 @@
         grid.hidden = heading.hidden = !visible;
         var link = heading.id && document.querySelector('.jump a[href="#' + heading.id + '"]');
         if (link) { link.hidden = !visible; link.querySelector('span').textContent = visible; }
+        total += visible;
       });
-      pageFilters.forEach(function (f) { f.setAttribute('aria-pressed', chosen.indexOf(f.dataset.gender) !== -1); });
+      var active = [];
+      pageFilters.forEach(function (f) {
+        var on = chosen.indexOf(f.dataset.gender) !== -1;
+        f.setAttribute('aria-pressed', on);
+        if (on) active.push({ label: f.dataset.label, remove: function () { f.click(); } });
+      });
+      sheetUI.update(active, total, function () { chosen = []; apply(); });
     };
     pageFilters.forEach(function (f) {
       f.querySelector('.n').textContent = document.querySelectorAll(
@@ -53,6 +98,7 @@
         apply();
       });
     });
+    apply();
   }
 
   // Search page.
@@ -126,10 +172,12 @@
       name_desc: function (a, b) { return b.t.localeCompare(a.t); }
     };
     out.sort(by[state.sort] || by.most_british);
+    var active = [];
     filters.forEach(function (f) {
       var on = f.dataset.tier ? state.tiers.indexOf(f.dataset.tier) !== -1
         : f.dataset.gender ? state.genders.indexOf(f.dataset.gender) !== -1 : state.direct;
       f.setAttribute('aria-pressed', on);
+      if (on) active.push({ label: f.dataset.label, remove: function () { f.click(); } });
       var n = f.querySelector('.n');
       if (n) n.textContent = f.dataset.tier ? counts[f.dataset.tier] : forCounts[f.dataset.gender];
     });
@@ -139,6 +187,9 @@
     list.innerHTML = out.slice(0, shown).map(card).join('');
     empty.hidden = out.length > 0;
     more.hidden = out.length <= shown;
+    sheetUI.update(active, out.length, function () {
+      state.tiers = []; state.genders = []; state.direct = false; change();
+    });
     syncUrl();
   }
   function change() { shown = PAGE; render(); }
