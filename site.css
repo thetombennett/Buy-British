@@ -135,6 +135,13 @@ a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2p
 .filter[data-tier="silver"][aria-pressed="true"]{background:var(--silver-bg)}
 .filter[data-tier="bronze"][aria-pressed="true"]{background:var(--bronze-bg)}
 .filter[data-direct][aria-pressed="true"]{background:var(--red);color:#fff}
+.filter[data-gender]{padding-left:14px}
+.filter[data-gender][aria-pressed="true"]{background:var(--navy);color:#fff}
+.filter[data-gender][aria-pressed="true"] .n{color:rgba(255,255,255,.75)}
+.filters+.filters{margin-top:-10px}
+.jump+.filters{margin:16px 0 0}
+.jump a[hidden],.grid[hidden],.grid li[hidden]{display:none}
+.filters+h2{margin:40px 0 16px}
 .empty{text-align:center;padding:48px 16px}
 #more{border:0;cursor:pointer;font:inherit;font-weight:700;margin-top:28px}
 #reset{border:0;cursor:pointer;font:inherit;font-weight:700}

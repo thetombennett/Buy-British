@@ -23,8 +23,39 @@
     });
   });
 
-  // Search page.
+  // Category pages: filter the cards already on the page by who they are for.
   var list = document.getElementById('results');
+  var pageFilters = list ? [] : Array.prototype.slice.call(document.querySelectorAll('.filter[data-gender]'));
+  if (pageFilters.length) {
+    var grids = Array.prototype.slice.call(document.querySelectorAll('main ul.grid'));
+    var chosen = [];
+    var apply = function () {
+      grids.forEach(function (grid) {
+        var visible = 0;
+        Array.prototype.forEach.call(grid.children, function (li) {
+          var show = !chosen.length || chosen.indexOf(li.dataset.g || 'unspecified') !== -1;
+          li.hidden = !show;
+          if (show) visible++;
+        });
+        var heading = grid.previousElementSibling;
+        grid.hidden = heading.hidden = !visible;
+        var link = heading.id && document.querySelector('.jump a[href="#' + heading.id + '"]');
+        if (link) { link.hidden = !visible; link.querySelector('span').textContent = visible; }
+      });
+      pageFilters.forEach(function (f) { f.setAttribute('aria-pressed', chosen.indexOf(f.dataset.gender) !== -1); });
+    };
+    pageFilters.forEach(function (f) {
+      f.querySelector('.n').textContent = document.querySelectorAll(
+        'main ul.grid > li[data-g="' + (f.dataset.gender === 'unspecified' ? '' : f.dataset.gender) + '"]').length;
+      f.addEventListener('click', function () {
+        var i = chosen.indexOf(f.dataset.gender);
+        if (i === -1) chosen.push(f.dataset.gender); else chosen.splice(i, 1);
+        apply();
+      });
+    });
+  }
+
+  // Search page.
   if (!list) return;
   var form = document.getElementById('search-form'), input = form.querySelector('input');
   var sortEl = document.getElementById('sort'), countEl = document.getElementById('count');
@@ -32,12 +63,14 @@
   var more = document.getElementById('more'), tries = document.getElementById('tries');
   var filters = document.querySelectorAll('.filter');
   var ORDER = { gold: 0, silver: 1, bronze: 2 }, NAMES = { gold: 'Gold', silver: 'Silver', bronze: 'Bronze' };
+  var GENDERS = ['women', 'men', 'unisex', 'unspecified'];
   var PAGE = 48, products = [], shown = PAGE;
   var params = new URLSearchParams(location.search);
   var state = {
     q: params.get('q') || '',
     tiers: (params.get('tier') || '').split(',').filter(function (t) { return t in ORDER; }),
     direct: params.get('direct') === '1',
+    genders: (params.get('for') || '').split(',').filter(function (x) { return GENDERS.indexOf(x) !== -1; }),
     sort: params.get('sort') || 'most_british'
   };
   input.value = state.q;
@@ -52,7 +85,7 @@
   }
   function money(p) { return '£' + p.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function card(p) {
-    return '<li class="card"><a href="p/' + p.s + '.html">' +
+    return '<li class="card" data-g="' + p.g + '"><a href="p/' + p.s + '.html">' +
       '<div class="thumb"><img src="' + esc(p.i) + '" alt="' + esc(p.t) + '" loading="lazy" width="480" height="600">' +
       '<span class="chips"><span class="chip chip-' + p.m + '"><svg class="medal" width="20" height="23" role="img" aria-label="' +
       NAMES[p.m] + ' medal"><use href="#medal-' + p.m + '"/></svg>' + NAMES[p.m] + '</span>' +
@@ -66,6 +99,7 @@
     if (state.q) u.set('q', state.q);
     if (state.tiers.length) u.set('tier', state.tiers.join(','));
     if (state.direct) u.set('direct', '1');
+    if (state.genders.length) u.set('for', state.genders.join(','));
     if (state.sort !== 'most_british') u.set('sort', state.sort);
     var qs = u.toString();
     history.replaceState(null, '', qs ? '?' + qs : location.pathname);
@@ -77,9 +111,11 @@
     });
     function inName(p) { var t = p.t.toLowerCase(); return words.every(function (w) { return t.indexOf(w) !== -1; }) ? 1 : 0; }
     var counts = { gold: 0, silver: 0, bronze: 0 };
-    matched.forEach(function (p) { counts[p.m]++; });
+    var forCounts = { women: 0, men: 0, unisex: 0, unspecified: 0 };
+    matched.forEach(function (p) { counts[p.m]++; forCounts[p.g || 'unspecified']++; });
     var out = matched.filter(function (p) {
-      return (!state.tiers.length || state.tiers.indexOf(p.m) !== -1) && (!state.direct || p.d);
+      return (!state.tiers.length || state.tiers.indexOf(p.m) !== -1) && (!state.direct || p.d) &&
+        (!state.genders.length || state.genders.indexOf(p.g || 'unspecified') !== -1);
     });
     var by = {
       // Products whose own name matches come before ones matched only by brand or category.
@@ -91,10 +127,11 @@
     };
     out.sort(by[state.sort] || by.most_british);
     filters.forEach(function (f) {
-      var on = f.dataset.tier ? state.tiers.indexOf(f.dataset.tier) !== -1 : state.direct;
+      var on = f.dataset.tier ? state.tiers.indexOf(f.dataset.tier) !== -1
+        : f.dataset.gender ? state.genders.indexOf(f.dataset.gender) !== -1 : state.direct;
       f.setAttribute('aria-pressed', on);
       var n = f.querySelector('.n');
-      if (n) n.textContent = counts[f.dataset.tier];
+      if (n) n.textContent = f.dataset.tier ? counts[f.dataset.tier] : forCounts[f.dataset.gender];
     });
     kicker.textContent = state.q ? 'Results for "' + state.q + '"' : 'All British finds';
     countEl.textContent = out.length + (out.length === 1 ? ' result' : ' results');
@@ -111,9 +148,11 @@
   sortEl.addEventListener('change', function () { state.sort = sortEl.value; change(); });
   filters.forEach(function (f) {
     f.addEventListener('click', function () {
-      if (f.dataset.tier) {
-        var i = state.tiers.indexOf(f.dataset.tier);
-        if (i === -1) state.tiers.push(f.dataset.tier); else state.tiers.splice(i, 1);
+      var set = f.dataset.tier ? state.tiers : f.dataset.gender ? state.genders : null;
+      var value = f.dataset.tier || f.dataset.gender;
+      if (set) {
+        var i = set.indexOf(value);
+        if (i === -1) set.push(value); else set.splice(i, 1);
       } else { state.direct = !state.direct; }
       change();
     });
@@ -122,7 +161,7 @@
     b.addEventListener('click', function () { input.value = b.textContent; input.dispatchEvent(new Event('input')); });
   });
   document.getElementById('reset').addEventListener('click', function () {
-    state.tiers = []; state.direct = false; input.value = ''; input.dispatchEvent(new Event('input'));
+    state.tiers = []; state.genders = []; state.direct = false; input.value = ''; input.dispatchEvent(new Event('input'));
   });
   more.addEventListener('click', function () { shown += PAGE; render(); });
 
