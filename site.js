@@ -134,7 +134,7 @@
     return '<li class="card" data-g="' + p.g + '"><a href="p/' + p.s + '.html">' +
       '<div class="thumb"><img src="' + esc(p.i) + '" alt="' + esc(p.t) + '" loading="lazy" width="480" height="600">' +
       '<span class="chips"><span class="chip chip-' + p.m + '"><svg class="medal" width="20" height="23" role="img" aria-label="' +
-      NAMES[p.m] + ' medal"><use href="#medal-' + p.m + '"/></svg>' + NAMES[p.m] + '</span>' +
+      NAMES[p.m] + ' medal rating"><use href="#medal-' + p.m + '"/></svg>' + NAMES[p.m] + '</span>' +
       (p.d ? '<span class="chip chip-direct">Direct</span>' : '') + '</span></div>' +
       '<div class="card-body"><span class="brand">' + esc(p.b) + '</span><span class="name">' + esc(p.t) + '</span>' +
       '<span class="price">' + (p.v ? 'From ' : '') + money(p.p) + '</span><span class="origin">' + esc(p.o) + '</span>' +
