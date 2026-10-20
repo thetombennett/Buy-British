@@ -51,7 +51,11 @@ p{margin:0 0 12px}
 .card a:hover,.tile a:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(11,37,69,.14)}
 a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2px}
 .thumb{position:relative;aspect-ratio:1/1;background:var(--tile)}
-.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;color:transparent}
+.thumb.noimg img,.product-image.noimg img{display:none}
+.thumb.noimg::after,.product-image.noimg::after{content:"Photo coming soon";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:500;color:var(--muted)}
+.product-image{position:relative}
+.product-image img{color:transparent}
 .chips{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .chip-row{display:flex;gap:8px;margin-bottom:12px}
 .chip-direct{background:var(--red);color:#fff !important;padding:3px 11px !important}
@@ -95,7 +99,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2p
 .jump a{background:var(--white);border:1px solid var(--border);border-radius:999px;padding:7px 15px;text-decoration:none;font-size:.86rem;font-weight:500;color:var(--ink)}
 .jump a:hover{border-color:var(--ink)}
 .jump span{color:var(--muted)}
-.jump+h2,.grid+h2{margin:40px 0 16px}
+.jump+h2,.grid+h2,dialog+h2{margin:40px 0 16px}
 .plain{padding-left:20px;margin:0}
 .plain li{margin-bottom:10px}
 .pledge{border-left:4px solid var(--red);padding:10px 16px;background:var(--cream);font-weight:700;color:var(--ink);border-radius:0 10px 10px 0}

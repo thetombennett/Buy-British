@@ -13,6 +13,20 @@
     update();
   });
 
+  // A product photo that fails to load (the shop has deleted it) becomes a
+  // tidy "Photo coming soon" tile instead of a broken image and its alt text.
+  function photoFailed(img) {
+    var box = img.closest('.thumb, .product-image');
+    if (box) box.classList.add('noimg');
+  }
+  document.addEventListener('error', function (e) {
+    if (e.target.tagName === 'IMG') photoFailed(e.target);
+  }, true);
+  // Photos that had already failed before this script ran.
+  document.querySelectorAll('.thumb img, .product-image img').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) photoFailed(img);
+  });
+
   // Product rails: arrow buttons.
   document.querySelectorAll('.rail-section').forEach(function (s) {
     var rail = s.querySelector('.rail');
