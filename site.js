@@ -152,7 +152,7 @@
       (p.d ? '<span class="chip chip-direct">Direct</span>' : '') + '</span></div>' +
       '<div class="card-body"><span class="brand">' + esc(p.b) + '</span><span class="name">' + esc(p.t) + '</span>' +
       '<span class="price">' + (p.v ? 'From ' : '') + money(p.p) + '</span><span class="origin">' + esc(p.o) + '</span>' +
-      '<span class="strip"><span>' + esc(p.b) + '</span><b>View ›</b></span></div></a></li>';
+      '<span class="strip"><span>' + esc(p.r || p.b) + '</span><b>View ›</b></span></div></a></li>';
   }
   function syncUrl() {
     var u = new URLSearchParams();
