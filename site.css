@@ -51,7 +51,7 @@ p{margin:0 0 12px}
 .card a:hover,.tile a:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(11,37,69,.14)}
 a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2px}
 .thumb{position:relative;aspect-ratio:1/1;background:var(--tile)}
-.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;color:transparent}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;color:transparent}
 .thumb.noimg img,.product-image.noimg img{display:none}
 .thumb.noimg::after,.product-image.noimg::after{content:"Photo coming soon";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:500;color:var(--muted)}
 .product-image{position:relative}
