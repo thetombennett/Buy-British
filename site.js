@@ -103,7 +103,7 @@
         grid.hidden = heading.hidden = !visible || !inSection;
         if (inSection) total += visible;
       });
-      if (sectionSelect) sectionSelect.value = section;
+      if (sectionSelect) { sectionSelect.value = section; sectionSelect.classList.toggle('on', !!section); }
       var active = [];
       if (section) {
         var on = document.querySelector('.jump-chip[data-section="' + section + '"]');
