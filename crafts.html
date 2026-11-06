@@ -90,8 +90,18 @@
   </div>
 </div>
   <p class="note">Prices checked 6 November 2026, delivery not included. <a href="for-brands.html#medals">How medal ratings work</a></p>
-  <nav class="jump" aria-label="Sections"><a href="#value-packs">Value packs <span>27</span></a> <a href="#yarn">Yarn <span>29</span></a></nav>
-  
+  <nav class="jump" aria-label="Show one section"><button type="button" class="jump-chip" data-section="value-packs" data-label="Value packs" aria-pressed="false">Value packs <span>27</span></button> <button type="button" class="jump-chip" data-section="yarn" data-label="Yarn" aria-pressed="false">Yarn <span>29</span></button></nav>
+  <div class="tools"><button type="button" class="tool" id="open-filters" aria-haspopup="dialog">Filter <span class="badge" id="filter-badge" hidden></span></button></div>
+  <div class="active-filters" id="active-filters" aria-label="Filters applied" hidden></div>
+  <dialog class="sheet" id="filter-sheet" aria-labelledby="sheet-title">
+    <div class="sheet-head"><h2 id="sheet-title">Filters</h2>
+      <button type="button" class="sheet-close" id="sheet-close" aria-label="Close filters">✕</button></div>
+    <div class="sheet-body"><h3 id="f-section"><label for="section-select">Section</label></h3><div class="select-wrap"><select id="section-select" class="section-select"><option value="">All sections</option><option value="value-packs">Value packs</option><option value="yarn">Yarn</option></select></div></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn btn-outline" id="sheet-clear">Clear all</button>
+      <button type="button" class="btn btn-navy" id="sheet-done">Show results</button>
+    </div>
+  </dialog>
   <h2 id="value-packs">Value packs</h2>
   <ul class="grid">
 <li class="card" data-g="">

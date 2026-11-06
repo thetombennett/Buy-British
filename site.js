@@ -74,12 +74,15 @@
     };
   }
 
-  // Category pages: filter the cards already on the page by who they are for.
+  // Category pages: filter the cards already on the page by section (the chips
+  // under the intro, or the dropdown in the filter sheet) and by who they are for.
   var list = document.getElementById('results');
+  var sectionChips = list ? [] : Array.prototype.slice.call(document.querySelectorAll('.jump-chip'));
+  var sectionSelect = document.getElementById('section-select');
   var pageFilters = list ? [] : Array.prototype.slice.call(document.querySelectorAll('.filter[data-gender]'));
-  if (pageFilters.length) {
+  if (!list && sheetUI && (sectionChips.length || pageFilters.length)) {
     var grids = Array.prototype.slice.call(document.querySelectorAll('main ul.grid'));
-    var chosen = [];
+    var chosen = [], section = '';
     var apply = function () {
       var total = 0;
       grids.forEach(function (grid) {
@@ -90,19 +93,42 @@
           if (show) visible++;
         });
         var heading = grid.previousElementSibling;
-        grid.hidden = heading.hidden = !visible;
-        var link = heading.id && document.querySelector('.jump a[href="#' + heading.id + '"]');
-        if (link) { link.hidden = !visible; link.querySelector('span').textContent = visible; }
-        total += visible;
+        var chip = heading.id && document.querySelector('.jump-chip[data-section="' + heading.id + '"]');
+        if (chip) {
+          chip.querySelector('span').textContent = visible;
+          chip.hidden = !visible && section !== heading.id;
+          chip.setAttribute('aria-pressed', section === heading.id);
+        }
+        var inSection = !section || section === heading.id;
+        grid.hidden = heading.hidden = !visible || !inSection;
+        if (inSection) total += visible;
       });
+      if (sectionSelect) sectionSelect.value = section;
       var active = [];
+      if (section) {
+        var on = document.querySelector('.jump-chip[data-section="' + section + '"]');
+        active.push({ label: on ? on.dataset.label : section, remove: function () { setSection(''); } });
+      }
       pageFilters.forEach(function (f) {
-        var on = chosen.indexOf(f.dataset.gender) !== -1;
-        f.setAttribute('aria-pressed', on);
-        if (on) active.push({ label: f.dataset.label, remove: function () { f.click(); } });
+        var isOn = chosen.indexOf(f.dataset.gender) !== -1;
+        f.setAttribute('aria-pressed', isOn);
+        if (isOn) active.push({ label: f.dataset.label, remove: function () { f.click(); } });
       });
-      sheetUI.update(active, total, function () { chosen = []; apply(); });
+      sheetUI.update(active, total, function () { chosen = []; section = ''; apply(); });
     };
+    var setSection = function (value) {
+      section = value;
+      apply();
+      // Bring the products into view when a section is picked lower down the page.
+      var tools = document.querySelector('.jump');
+      if (value && tools && tools.getBoundingClientRect().top < 0) tools.scrollIntoView({ block: 'start' });
+    };
+    sectionChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        setSection(section === chip.dataset.section ? '' : chip.dataset.section);
+      });
+    });
+    if (sectionSelect) sectionSelect.addEventListener('change', function () { setSection(sectionSelect.value); });
     pageFilters.forEach(function (f) {
       f.querySelector('.n').textContent = document.querySelectorAll(
         'main ul.grid > li[data-g="' + (f.dataset.gender === 'unspecified' ? '' : f.dataset.gender) + '"]').length;
@@ -112,6 +138,9 @@
         apply();
       });
     });
+    // A link to a section (e.g. "See all" on a product page) opens with that section chosen.
+    var start = location.hash.slice(1);
+    if (start && document.querySelector('.jump-chip[data-section="' + start + '"]')) section = start;
     apply();
   }
 
