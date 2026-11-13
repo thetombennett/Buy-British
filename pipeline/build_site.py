@@ -651,7 +651,12 @@ def home_page(pages, counts, checked):
       <h2>The BuyBritish app</h2>
       <p>We are building the BuyBritish mobile app, so you can find British products and check their medal ratings wherever you shop.</p>
     </div>
-    <img src="buybritish-preview.png" alt="Preview of the BuyBritish mobile app" loading="lazy">
+    <div class="app-shots" tabindex="0" aria-label="Screens from the BuyBritish app">
+      <figure><img src="app-home.jpg" alt="App home screen with a search bar, categories and popular British finds" width="480" height="809" loading="lazy"><figcaption>Find British products</figcaption></figure>
+      <figure><img src="app-search.jpg" alt="Search results for soap, each showing its medal rating" width="480" height="809" loading="lazy"><figcaption>A medal rating on every result</figcaption></figure>
+      <figure><img src="app-coat.jpg" alt="Search results for coats from British brands" width="480" height="809" loading="lazy"><figcaption>Search across British brands</figcaption></figure>
+      <figure><img src="app-medals.jpg" alt="Screen explaining what gold, silver and bronze medal ratings mean" width="480" height="809" loading="lazy"><figcaption>Know what each medal means</figcaption></figure>
+    </div>
   </section>'''
     return layout("index.html", "BuyBritish | Find and support British businesses",
                   "Discover British retailers, British brands and UK-made products with BuyBritish.",
@@ -1015,9 +1020,12 @@ a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2p
 .mission{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0}
 .mission h3{margin-bottom:4px}
 .mission p{margin:0;font-size:.92rem}
-.app-band{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 40px 0;display:flex;align-items:center;justify-content:space-between;gap:32px;overflow:hidden}
-.app-band p{max-width:30em}
-.app-band img{width:230px;height:260px;object-fit:cover;object-position:top;border-radius:18px 18px 0 0;box-shadow:0 4px 18px rgba(11,37,69,.18);flex:none}
+.app-band{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 40px 36px;overflow:hidden}
+.app-band p{max-width:34em}
+.app-shots{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:24px}
+.app-shots figure{margin:0;min-width:0}
+.app-shots img{display:block;width:100%;height:auto;aspect-ratio:480/809;border-radius:20px;border:1px solid var(--border);box-shadow:0 6px 20px rgba(11,37,69,.14);background:#F5F0E8}
+.app-shots figcaption{margin-top:10px;font-size:.88rem;font-weight:600;color:var(--ink);text-align:center}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .two-col .content-card{margin:0}
 .content-card{background:var(--white);border-radius:var(--radius);padding:28px;margin:18px 0;box-shadow:var(--shadow)}
@@ -1188,8 +1196,9 @@ a:focus-visible,button:focus-visible{outline:3px solid #6FB7FF;outline-offset:2p
 .tiles{grid-template-columns:1fr}
 .tile .thumb{aspect-ratio:16/9}
 .mission{grid-template-columns:1fr;gap:16px}
-.app-band{flex-direction:column;align-items:flex-start;padding:24px 22px 0}
-.app-band img{align-self:center}
+.app-band{padding:24px 22px 26px}
+.app-shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:20px -22px 0;padding:0 22px 6px;scrollbar-width:thin}
+.app-shots figure{flex:0 0 62%;scroll-snap-align:center}
 .two-col{grid-template-columns:1fr}
 .content-card{padding:22px}
 .brand-panel{padding:14px}
