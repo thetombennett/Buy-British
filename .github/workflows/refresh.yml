@@ -1,0 +1,60 @@
+name: Daily feed refresh
+
+on:
+  schedule:
+    - cron: "41 4 * * *"   # every day at 04:41 UTC
+  workflow_dispatch:       # "Run workflow" button for an on-demand refresh
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install "psycopg[binary]==3.2.*"
+
+      - name: Download feeds
+        env:
+          AWIN_FEEDLIST_URL: ${{ secrets.AWIN_FEEDLIST_URL }}
+        run: |
+          printf '%s' "$AWIN_FEEDLIST_URL" > awin_feedlist_url.txt
+          python fetch_feeds.py --force
+
+      - name: Build database
+        run: python import.py 'feeds/*.csv' buybritish.db --no-direct
+
+      - name: Rebuild website
+        run: |
+          python build_site.py --db buybritish.db --out ..
+          rm -f ../tech.html
+
+      - name: Publish website
+        run: |
+          cd ..
+          git config user.name "BuyBritish"
+          git config user.email "hello@buybritish.co"
+          git add -A
+          if git diff --cached --quiet; then echo "No website changes"; exit 0; fi
+          git commit -q -m "Daily feed refresh $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Load app database (Supabase)
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: python cloud_load.py buybritish.db

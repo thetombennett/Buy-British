@@ -1,0 +1,7 @@
+# Never commit the feed key, the downloaded feeds or the built database.
+awin_feedlist_url.txt
+awin_token.txt
+feeds/
+*.db
+*.db.new
+__pycache__/
