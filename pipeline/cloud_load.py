@@ -10,6 +10,7 @@ Tables (all read-only to the public app key):
   maker     one row per rated maker: name, medal, facts
   product   one row per listed product: maker, medal, cheapest offer, stock, search text
   offer     every shop's offer for each listed product
+  category  each category with product and in-stock counts
   meta      prices_checked and row counts from the last load
 
 Everything is replaced in one transaction, so the app never sees a half-loaded catalogue.
@@ -75,6 +76,11 @@ CREATE TABLE IF NOT EXISTS offer (
     affiliate_url       TEXT NOT NULL,
     last_seen_at        TIMESTAMPTZ NOT NULL
 );
+CREATE TABLE IF NOT EXISTS category (
+    name            TEXT PRIMARY KEY,
+    products        INTEGER NOT NULL,
+    in_stock        INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS meta (
     key     TEXT PRIMARY KEY,
     value   TEXT NOT NULL
@@ -91,7 +97,7 @@ READ_ONLY = """
 DO $$
 DECLARE t TEXT;
 BEGIN
-  FOREACH t IN ARRAY ARRAY['maker', 'product', 'offer', 'meta'] LOOP
+  FOREACH t IN ARRAY ARRAY['maker', 'product', 'offer', 'category', 'meta'] LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
     EXECUTE format('DROP POLICY IF EXISTS "Public read" ON %I', t);
     EXECUTE format('CREATE POLICY "Public read" ON %I FOR SELECT TO anon, authenticated USING (true)', t);
@@ -162,7 +168,7 @@ def load(db_path, url):
             cur.execute(READ_ONLY)
         conn.commit()
         with conn.transaction(), conn.cursor() as cur:
-            cur.execute("TRUNCATE offer, product, maker, meta")
+            cur.execute("TRUNCATE offer, product, maker, category, meta")
             with cur.copy("COPY maker (id, name, tier, tier_rank, medal, facts, direct, product_count) FROM STDIN") as cp:
                 for m in makers.values():
                     cp.write_row((m["id"], m["name"], m["tier"], m["tier_rank"], Jsonb(m["medal"]),
@@ -176,6 +182,14 @@ def load(db_path, url):
                           "total_price_gbp, availability, affiliate_url, last_seen_at) FROM STDIN") as cp:
                 for o in offers:
                     cp.write_row(o)
+            cats = {}
+            for p in products.values():
+                c = cats.setdefault(p["row"][3] or "Other", [0, 0])
+                c[0] += 1
+                c[1] += p["row"][16]
+            with cur.copy("COPY category (name, products, in_stock) FROM STDIN") as cp:
+                for name, (n, n_in) in sorted(cats.items()):
+                    cp.write_row((name, n, n_in))
             for k, v in {"prices_checked": checked or "", "loaded_at": datetime.now(timezone.utc).isoformat(),
                          "makers": str(len(makers)), "products": str(len(products)),
                          "offers": str(len(offers))}.items():
