@@ -56,5 +56,7 @@ jobs:
 
       - name: Load app database (Supabase)
         env:
-          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL }}
+          # Supabase session pooler (London). The password is kept separately so it needs no URL-encoding.
+          DATABASE_URL: postgresql://postgres.emnnkcmpyrlfiszhwjsw@aws-1-eu-west-2.pooler.supabase.com:5432/postgres?sslmode=require
+          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
         run: python cloud_load.py buybritish.db

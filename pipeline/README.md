@@ -9,6 +9,6 @@ Runs every morning as the "Daily feed refresh" GitHub Action (`.github/workflows
 
 Secrets (Settings > Secrets and variables > Actions):
 - `AWIN_FEEDLIST_URL`: the contents of `awin_feedlist_url.txt` (contains the feed key).
-- `SUPABASE_DB_URL`: the Supabase "Session pooler" connection string, with the database password filled in.
+- `SUPABASE_DB_PASSWORD`: the Supabase database password, exactly as typed (no encoding needed).
 
 Medal ratings live in `brands.py`. Change them there and the next run updates both the site and the app.
